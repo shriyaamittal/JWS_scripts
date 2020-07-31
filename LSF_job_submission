@@ -1,0 +1,29 @@
+# ERISOne partners server uses LSF for job submission
+
+bjobs === qstat
+bkill <jobid>
+bqueues : display the available queues
+bsub === qsub
+
+LSF script (typically with extension .lsf)
+
+#!/bin/bash
+#BSUB -J <job name>
+#BSUB -o <output path>/<output filename>.out
+#BSUB -e <error path>/<error filename>.err
+#BSUB -q <queue name> # default queue is defaultlow
+#BSUB -R <memory usage, 1000=1GB>
+
+Submission as:
+bsub < <script name>
+The "<" between the submission and the script name is important. Without it, it will seem like the job has been submitted but it hasn't been!
+
+%%%
+#!/bin/bash
+#BSUB -J sm_test
+#BSUB -o ./output/sm_test-%J.out
+#BSUB -e ./output/sm_test-%J.err
+#BSUB -q normal
+
+echo "hello world"
+%%%
