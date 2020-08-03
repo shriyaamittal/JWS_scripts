@@ -27,3 +27,6 @@ The "<" between the submission and the script name is important. Without it, it 
 
 echo "hello world"
 %%%
+
+Submission on interactive queue:
+bsub -Is -R 'rusage[mem=10000]' -n 4 /bin/bash
