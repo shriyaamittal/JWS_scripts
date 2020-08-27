@@ -1,0 +1,34 @@
+####
+##Vienna RNAPackage
+####
+
+Download source code: https://www.tbi.univie.ac.at/RNA/#download
+
+tar -zxvf ViennaRNA-2.4.15.tar.gz
+cd ViennaRNA-2.4.15
+./configure --enable-macosx-installer
+
+This creates a pkg file at path: /Users/shriyaa/Desktop/ViennaRNA-2.4.15/packaging/macosx
+I installed the pkg file with name, ViennaRNA Package 2.4.15 Core.pkg
+
+Can I delete Vienna... folder now that it is installed? Yes!
+
+Usage: 
+$ RNAfold ... 
+
+Examples of usage: https://www.tbi.univie.ac.at/RNA/RNAfold.1.html
+
+RNAfold -p -d2 --noLP < sequence.fa > sequence.out
+
+
+Example input:
+>test_sequenc
+GUUAGCUCAGUUGGUUAGAGCGCACCCCUGAUAAGGGUGAGGUCGCUGAUUCGAAUUCAGCAUAGCCCA
+
+Example output:
+....((((.........)))).(((((.......))))).(((.(((((.......)))))...))).. (-20.60)
+....((((.........)))).((((({{....}))))).(((.(((((.......)))))...))).. [-21.47]
+....((((.........)))).((((.((....)))))).(((.(((((.......)))))...))).. {-19.80 d=6.84}
+ frequency of mfe structure in ensemble 0.244422; ensemble diversity 10.51
+
+ -20.60 kcal/mol is MFE of the optimal SS prediction!
