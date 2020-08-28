@@ -7,7 +7,7 @@ Download source code: https://www.tbi.univie.ac.at/RNA/#download
 tar -zxvf ViennaRNA-2.4.15.tar.gz
 cd ViennaRNA-2.4.15
 ./configure --enable-macosx-installer
-make install
+make install - Does this work?
 
 This creates a pkg file at path: /Users/shriyaa/Desktop/ViennaRNA-2.4.15/packaging/macosx
 I installed the pkg file with name, ViennaRNA Package 2.4.15 Core.pkg
