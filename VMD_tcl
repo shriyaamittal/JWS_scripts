@@ -1,0 +1,20 @@
+####
+## Measure RMSD
+####
+set sel1 [atomselect 0 "backbone"]
+set sel2 [atomselect 1 "backbone"]
+measure rmsd $sel1 $sel2
+
+####
+## Align 6c8i  with 5c8d
+####
+set sel0 [atomselect 0 "backbone and not resname DGP"]
+set sel1 [atomselect 1 "backbone"]
+
+set M [measure fit $sel1 $sel0] 
+
+set move_sel [atomselect 1 "all"]
+
+$move_sel move $M
+
+$move_sel writepdb aligned_6c8l_wrt_6c8d.pdb
