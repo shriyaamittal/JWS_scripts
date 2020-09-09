@@ -1,0 +1,11 @@
+https://www.rosettacommons.org/demos/latest/tutorials/install_build/install_build#installing-rosetta
+
+# Download v3.12
+# untar file
+
+cd rosetta*/main/source
+./scons.py -j 2 mode=release bin
+<2> : # of cores
+My Mac mini has 6 cores. Check using the following command,
+system_profiler SPHardwareDataType
+
