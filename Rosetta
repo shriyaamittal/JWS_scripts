@@ -13,26 +13,31 @@ Add the following to .bash_profile:
 export PATH=$PATH:/path/to/rosetta/bin 
 example, export PATH=$PATH:/Users/mittal/Desktop/rosetta_bin_mac_2020.08.61146_bundle/main/source/bin
 
+Tutorial: https://www.rosettacommons.org/demos/latest/tutorials/scoring/scoring
+I was sort of able to follow along with the executable below
+./Desktop/rosetta_bin_mac_2020.08.61146_bundle/main/source/bin/score_jd2.macosclangrelease -in:file:s ./Downloads/1qys.pdb -out:pdb
+
+####
+RNA applications
+####
+
 export ROSETTA="/Users/mittal/Desktop/rosetta_bin_mac_2020.08.61146_bundle/"
 export RNA_TOOLS=$ROSETTA/tools/rna_tools/
 export PATH=$RNA_TOOLS/bin/:$PATH
 export PYTHONPATH=$PYTHONPATH:$RNA_TOOLS/bin/
 
-Tutorial: https://www.rosettacommons.org/demos/latest/tutorials/scoring/scoring
-I was sort of able to follow along with the executable below
-./Desktop/rosetta_bin_mac_2020.08.61146_bundle/main/source/bin/score_jd2.macosclangrelease -in:file:s ./Downloads/1qys.pdb -out:pdb
-
-
 Check using the following,
 python $RNA_TOOLS/sym_link.py
 rna_helix.py -h
 
-####
-RNA applications
-####
 rna_denovo.macosclangrelease -help
 
 Tutorial: https://www.rosettacommons.org/docs/latest/FARFAR2
-rna_denovo.macosclangrelease -sequence "ucaggu aagcag" -secstruct "(....( )....)" -nstruct 2 -out:file:silent test.out -minimize_rna 
-The output file test.out will look like garbage. To extract the pdb file from it, 
+rna_denovo.macosclangrelease -sequence "ucaggu aagcag" -secstruct "(....( )....)" -nstruct <n> -out:file:silent test.out -minimize_rna 
+
+or 
+
+rna_denovo.macosclangrelease -fasta <sequence_filename> -secstruct_file <structure_filename> -nstruct <n> -out:file:silent <output_filename> -minimize_rna <true_or_false> 
+
+The output file, ex. test.out, will look like garbage. To extract the pdb file from it, 
 extract_pdbs.macosclangrelease -in:file:silent test.out -tags $TAG
