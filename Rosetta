@@ -41,3 +41,7 @@ rna_denovo.macosclangrelease -fasta <sequence_filename> -secstruct_file <structu
 
 The output file, ex. test.out, will look like garbage. To extract the pdb file from it, 
 extract_pdbs.macosclangrelease -in:file:silent test.out -tags $TAG
+
+The following print outs the structure tag for the model with the best score,
+grep "^SCORE:" <output_filename> | grep -v description | sort -nk2 | head -n 14500 | sort -nk24 | head -n 1 | awk '{print $NF}'
+
