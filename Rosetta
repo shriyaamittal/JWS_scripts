@@ -43,4 +43,6 @@ The output file, ex. test.out, will look like garbage. To extract the pdb file f
 extract_pdbs.macosclangrelease -in:file:silent test.out -tags $TAG
 
 The following prints the score and structure tags,
-grep "^SCORE:" ${structure}.out | grep -v description | awk '{print $2, $NF}' 
+grep "^SCORE:" ${structure}.out | grep -v description | awk '{print $2, $NF}'
+
+-obligate_pair 3 22 , to include a base-pair 
