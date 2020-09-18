@@ -1,4 +1,24 @@
 ####
+## Align and calculate RMSD
+####
+
+mol new structure1.pdb
+mol new structure2.pdb
+
+set sel1 [atomselect 0 "all"]
+set sel2 [atomselect 1 "all"]
+
+atomselect0 num
+atomselect1 num
+
+set M [measure fit $sel1 $sel2] 
+set move_sel [atomselect 0 "all"]
+$move_sel move $M
+
+measure rmsd $sel1 $sel2
+
+
+####
 ## Measure RMSD
 ####
 set sel1 [atomselect 0 "backbone"]
