@@ -44,5 +44,10 @@ extract_pdbs.macosclangrelease -in:file:silent test.out -tags $TAG
 
 The following prints the score and structure tags,
 grep "^SCORE:" ${structure}.out | grep -v description | awk '{print $2, $NF}'
+## Print structure with lowest REU Score
+grep "^SCORE:" ${structure}.out | grep -v description | sort -nk2 | head -n 1 | awk '{print $NF}'
+## From the top "x" lowest REU value structures, print one with lowest RMSD. Here x=10
+grep "^SCORE:" ${structure}.out | grep -v description | sort -nk2 | head -n 10 | sort -nk24 | head -n 1 | awk '{print $NF}'
+
 
 -obligate_pair 3 22 , to include a base-pair 
