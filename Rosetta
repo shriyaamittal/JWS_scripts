@@ -51,3 +51,13 @@ grep "^SCORE:" ${structure}.out | grep -v description | sort -nk2 | head -n 10 |
 
 
 -obligate_pair 3 22 , to include a base-pair 
+
+
+## rna_cluster
+
+NN=10
+RR=5
+rm clustered.out
+rna_cluster.macosclangrelease -in:file:silent RS1_no_overhang_primer_Urun.out -out:file:silent clustered.out -cluster:radius $RR -nstruct $NN
+extract_pdbs.macosclangrelease -in:file:silent clustered.out -tags $TAG
+grep "^SCORE:" clustered.out | grep -v description | awk '{print $2, $NF}'
