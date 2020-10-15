@@ -58,6 +58,25 @@ grep "^SCORE:" ${structure}.out | grep -v description | sort -nk2 | head -n 10 |
 NN=10
 RR=5
 rm clustered.out
-rna_cluster.macosclangrelease -in:file:silent RS1_no_overhang_primer_Urun.out -out:file:silent clustered.out -cluster:radius $RR -nstruct $NN
+rna_cluster.macosclangrelease -in:file:silent <filename>.out -out:file:silent clustered.out -cluster:radius $RR -nstruct $NN
 extract_pdbs.macosclangrelease -in:file:silent clustered.out -tags $TAG
 grep "^SCORE:" clustered.out | grep -v description | awk '{print $2, $NF}'
+
+
+## Base interaction features
+grep "^SCORE:" <filename>.out | grep -v description | awk '{print $2, $24, $25, $26 , $NF}'
+
+$24: N_WC
+$25: N_NWC
+$26: N_BS
+
+## Change to excel-readable format
+
+grep "^SCORE:" <filename>.out | grep -v description | awk -v OFS=, '{print $2, $24, $25, $26 , $NF}' > data.csv
+
+## Suitename conformers/outliers
+
+rna_suitename.macosclangrelease -s <PDB filename>
+
+rna_suitename.macosclangrelease -s <PDB filename> > suitename.txt
+grep -e "Residue " suitename.txt | awk -v OFS=, '{print $1, $4, $5, $6,$NF}' > data.csv

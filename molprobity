@@ -2,5 +2,5 @@ brew install svn
 
 mkdir MolProbity
 svn --quiet --non-interactive --trust-server-cert export https://github.com/rlabduke/MolProbity.git/trunk/install_via_bootstrap.sh
-source ./install_via_bootstrap.sh
+source ./install_via_bootstrap.sh => Facing issues with Java installation ...
 
