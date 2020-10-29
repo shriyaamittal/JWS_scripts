@@ -1,6 +1,9 @@
 https://www.rosettacommons.org/demos/latest/tutorials/install_build/install_build#installing-rosetta
 
 # Download v3.12
+
+curl -o rosetta_bin_linux_3.12_bundle.tgz -u Academic_User:<<pwd>> https://www.rosettacommons.org/downloads/academic/3.12/rosetta_bin_linux_3.12_bundle.tgz
+
 # untar file
 
 cd rosetta*/main/source
