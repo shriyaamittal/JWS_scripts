@@ -83,3 +83,22 @@ rna_suitename.macosclangrelease -s <PDB filename>
 
 rna_suitename.macosclangrelease -s <PDB filename> > suitename.txt
 grep -e "Residue " suitename.txt | awk -v OFS=, '{print $1, $4, $5, $6,$NF}' > data.csv
+
+## Mg modeling
+Rosetta RNA application: https://www.rosettacommons.org/docs/latest/application_documentation/rna/mg-modeler
+Path for samples tests:
+
+main/tests/integration/tests/mg_modeler      
+main/tests/integration/tests/mg_modeler_lores
+
+mg_modeler.default.macosclangrelease -s arich_2r8s_RNA.pdb -out:file:silent arich_mg_hydrate.out -score:weights test_hires2.wts -pose_ligand_res 8
+
+mg_modeler.default.macosclangrelease -s arich_2r8s_RNA.pdb -out:file:silent arich_mg_hydrate.out
+
+mg_modeler.default.macosclangrelease -s arich_2r8s_RNA.pdb -out:file:silent arich_mg_hydrate.out -pose_ligand_res 8
+
+extract_pdbs.macosclangrelease -in:file:silent arich_mg_hydrate.out -tags $TAG
+
+For VMD visualization,
+name MG
+resname HOH
