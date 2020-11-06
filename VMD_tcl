@@ -5,13 +5,13 @@
 mol new structure1.pdb
 mol new structure2.pdb
 
-set sel1 [atomselect 0 "all"]
-set sel2 [atomselect 1 "all"]
+set sel0 [atomselect 0 "all"]
+set sel1 [atomselect 1 "all"]
 
 atomselect0 num
 atomselect1 num
 
-set M [measure fit $sel1 $sel2] 
+set M [measure fit $sel1 $sel0] 
 set move_sel [atomselect 1 "all"]
 $move_sel move $M
 
@@ -32,9 +32,7 @@ set sel0 [atomselect 0 "backbone and not resname DGP"]
 set sel1 [atomselect 1 "backbone"]
 
 set M [measure fit $sel1 $sel0] 
-
 set move_sel [atomselect 1 "all"]
-
 $move_sel move $M
 
 $move_sel writepdb aligned_6c8l_wrt_6c8d.pdb
