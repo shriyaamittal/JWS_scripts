@@ -1,0 +1,33 @@
+1. Create PDB
+2. Create PSF using tcl script below, run as: vmd -dispdev text -e <>.pgn
+
+package require psfgen
+topology /Users/mittal/Downloads/toppar_c36_jul20/top_all36_na.rtf
+topology /Users/mittal/Downloads/toppar_c36_jul20/toppar_water_ions_namd.str
+alias residue G GUA
+alias residue C CYT
+alias residue A ADE
+alias residue U URA
+alias residue MG MG
+#alias atom MG MG
+segment U {
+        pdb ligand_A_no_875_877_no_Mg.pdb
+        first 5POM
+        last 3POM
+}
+segment M {
+        pdb ligand_A_only_Mg.pdb
+}
+coordpdb ligand_A_no_875_877_no_Mg.pdb U
+guesscoord
+coordpdb ligand_A_only_Mg.pdb M
+guesscoord
+writepdb ligand_A_3POM_5POM_with_Mg_01.pdb
+writepsf ligand_A_3POM_5POM_with_Mg_01.psf
+exit
+
+3. Solvate using tcl script below, run as: vmd -dispdev text -e solvate.tcl
+package require solvate
+solvate ligand_A_3POM_5POM_with_Mg_01.psf ligand_A_3POM_5POM_with_Mg_01.pdb -t 5 -o ligand_A_3POM_5POM_with_Mg_01_wb
+
+4. Minimize/Equilibrate, see file NAMD_minimization.inp
