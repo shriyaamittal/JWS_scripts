@@ -30,4 +30,18 @@ exit
 package require solvate
 solvate ligand_A_3POM_5POM_with_Mg_01.psf ligand_A_3POM_5POM_with_Mg_01.pdb -t 5 -o ligand_A_3POM_5POM_with_Mg_01_wb
 
-4. Minimize/Equilibrate, see file NAMD_minimization.inp
+4. Need the following tcl scripts for box size and origin. 
+Save the following in a file called, box.tcl
+
+mol new {/Users/mittal/Research/01_JWS/01_Mg_chelation/bidendate_clamp_ligand_construction/ligands_minimization/ligand_A/ligand_A_3POM_5POM_with_Mg_01_wb.psf} type {psf} first 0 last -1 step 1 waitfor 1
+mol addfile {/Users/mittal/Research/01_JWS/01_Mg_chelation/bidendate_clamp_ligand_construction/ligands_minimization/ligand_A/ligand_A_3POM_5POM_with_Mg_01_wb.pdb} type {pdb} first 0 last -1 step 1 waitfor 1 0
+set everyone [atomselect top all]
+measure minmax $everyone
+measure center $everyone
+exit
+
+Run as, vmd -dispdev text -e box.tcl | tail -n 5 | head -n 2
+
+Put this info in minimization.inp
+	 
+5. Minimize/Equilibrate, see file NAMD_minimization.inp. Run as, namd2 minimization.inp > minimization.log

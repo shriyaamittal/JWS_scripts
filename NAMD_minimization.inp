@@ -42,7 +42,7 @@ pairlistdist        14.0
 
 
 # Integrator Parameters
-timestep            1.0  ;# 1fs/step
+timestep            2.0  ;# 2fs/step
 rigidBonds          all  ;# needed for 2fs steps
 nonbondedFreq       1
 fullElectFrequency  2  
