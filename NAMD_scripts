@@ -47,5 +47,8 @@ Put this info in minimization.inp
 5. Minimize/Equilibrate, see file NAMD_minimization.inp. Run as, namd2 minimization.inp > minimization.log
 
 6. Imaging,
-pbc unwrap -all
-animate write dcd unwrapped.dcd beg 0 end -1 waitfor all
+
+pbc wrap -centersel "resname URA" -center com -compound residue -all
+pbc wrap -centersel "name MG" -center com -compound residue -all
+
+animate write dcd wrapped.dcd beg 0 end -1 waitfor all
