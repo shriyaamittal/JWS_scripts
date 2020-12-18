@@ -20,3 +20,20 @@ squeue -u <user> === qstat
 
 squeue -u shm976
 scancel <Job ID>
+
+Example script with multiple cores in NAMD,
+
+#!/bin/bash
+#SBATCH -c 20					# 20 core
+#SBATCH -t 0-12:00				# in D-HH:MM format
+#SBATCH -p short				# Run in short partition
+#SBATCH -o RS1_01_step5.1_%j.out		# File to which STDOUT + STDERR will be written, including job ID in filename
+
+# Add your job command here
+
+path=""
+cd ${path}
+
+/home/shm976/Sofware/NAMD_2.14b2_Linux-x86_64-multicore/namd2 +p 20 step5.1_production.inp > step5.1_production.log
+
+# Submit as, sbatch SLURM
