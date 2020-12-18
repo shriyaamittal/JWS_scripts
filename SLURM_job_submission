@@ -1,0 +1,22 @@
+Example script,
+
+#!/bin/bash
+#SBATCH -c 2					# 1 core
+#SBATCH -t 0-00:05				# Runtime of 5 minutes, in D-HH:MM format
+#SBATCH -p short				# Run in short partition
+#SBATCH -o jobname_%j.out			# File to which STDOUT + STDERR will be written, including job ID in filename
+#SBATCH --mail-type=FAIL			# ALL email notification type
+#SBATCH --mail-user=abc123@hms.harvard.edu	# Email to which notifications will be sent
+
+# Add your job command here
+
+# /home/shm976/Sofware/NAMD_2.14b2_Linux-x86_64-multicore/namd2
+
+# Submit as, sbatch SLURM
+
+Commands on HMS O2 cluster: https://wiki.rc.hms.harvard.edu/display/O2/Using+Slurm+Basic#UsingSlurmBasic-BasicSLURMcommands
+
+squeue -u <user> === qstat
+
+squeue -u shm976
+scancel <Job ID>
