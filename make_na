@@ -1,10 +1,16 @@
 ####
 ## make-na webserver
+####
+
 https://casegroup.rutgers.edu/casegr-sh-2.2.html
 http://structure.usc.edu/make-na/
 
 Offline usage: 
 1. Download C code, https://casegroup.rutgers.edu/fd_helix.c
 2. Compile, gcc -o fd_helix fd_helix.c -lm
+3. ./fd_helix
+Usage: fd_helix <helix-type> <seq>; PDB file to stdout
+4. I have created an alias in bash, so <fd_helix> should work!
 
+Example:
 ./fd_helix arna AA > aa.pdb
