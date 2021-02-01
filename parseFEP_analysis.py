@@ -46,5 +46,10 @@ data_f.close()
 data=np.array(data)
 data_backward=np.transpose(data)
 
-plt.errorbar(data_forward[0],data_forward[2],yerr=data_forward[3],color='k')
-plt.errorbar(data_backward[0],data_backward[2],yerr=data_backward[3],color='r')
+plt.errorbar(data_forward[0],data_forward[2],yerr=data_forward[3],color='k',"forward")
+plt.errorbar(data_backward[0],data_backward[2],yerr=data_backward[3],color='grey',label="backward")
+
+plt.ylabel(r"$\Delta$G")
+plt.xlabel(r"$\lambda$")
+
+plt.legend(frameon=False)
