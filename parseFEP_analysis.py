@@ -33,10 +33,10 @@ data_forward=func_read_file(data_filename)
 data_filename="./ParseFEP_mg_annihilation_backward.log"
 data_backward=func_read_file(data_filename)
 
-plt.plot(data_forward[0],data_forward[2],"o",markersize=5, color="k")
-plt.plot(data_backward[0],data_backward[2],"v",markersize=5, color="grey")
-plt.errorbar(data_forward[0],data_forward[2],yerr=data_forward[3],color='k',label="forward")
-plt.errorbar(data_backward[0],data_backward[2],yerr=data_backward[3],color='grey',label="backward")
+plt.plot(data_forward[0],data_forward[2],"o",markersize=5, color="k",label="forward")
+plt.plot(data_backward[0],data_backward[2],"v",markersize=5, color="k",label="backward")
+plt.errorbar(data_forward[0],data_forward[2],yerr=data_forward[3],color='k')
+plt.errorbar(data_backward[0],data_backward[2],yerr=data_backward[3],color='k')
 
 plt.legend(frameon=False)
 
