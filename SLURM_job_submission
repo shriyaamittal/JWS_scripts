@@ -1,9 +1,12 @@
-Example script,
+####
+## Example script,
+####
 
 #!/bin/bash
 #SBATCH -c 1					# 1 core
 #SBATCH -t 0-00:05				# Runtime of 5 minutes, in D-HH:MM format
 #SBATCH -p short				# Run in short partition
+#SBATCH --mem=100M				# Memory total in MB (for all cores)
 #SBATCH -o jobname_%j.out			# File to which STDOUT + STDERR will be written, including job ID in filename
 #SBATCH --mail-type=FAIL			# ALL email notification type
 #SBATCH --mail-user=abc123@hms.harvard.edu	# Email to which notifications will be sent
@@ -11,15 +14,20 @@ Example script,
 # Add your job command here
 
 # Submit as, sbatch SLURM
+# or, sbatch --dependency=afterok:${job_id} ${job_filename}
 
 Commands on HMS O2 cluster: https://wiki.rc.hms.harvard.edu/display/O2/Using+Slurm+Basic#UsingSlurmBasic-BasicSLURMcommands
 
 squeue -u <user> === qstat
 
-squeue -u shm976
+squeue -u shm976 OR squeue -u $USER
 scancel <Job ID>
 
-Example script with multiple cores in NAMD,
+O2sacct, to check memory and CPU usage efficiency
+
+####
+## Example script with multiple cores in NAMD,
+####
 
 #!/bin/bash
 #SBATCH -c 20					# 20 core
@@ -35,3 +43,19 @@ cd ${path}
 /home/shm976/Sofware/NAMD_2.14b2_Linux-x86_64-multicore/namd2 +p 20 step5.1_production.inp > step5.1_production.log
 
 # Submit as, sbatch SLURM
+
+####
+## GPU
+####
+
+#!/bin/bash
+#SBATCH -c 4					# 4 core
+#SBATCH -t 8:00:00				# Runtime of 8 hours
+#SBATCH -p gpu_quad				# gpu_quad partition
+#SBATCH --gres=gpu:1
+#SBATCH -o <job>_%j.out		# File to which STDOUT + STDERR will be written, including job ID in filename
+
+module load gcc/6.2.0 cuda/10.1
+# Add your job command here
+/home/shm976/Sofware/NAMD_2.14_Linux-x86_64-multicore-CUDA/namd2
+
