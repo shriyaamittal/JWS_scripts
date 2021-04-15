@@ -36,3 +36,47 @@ set move_sel [atomselect 1 "all"]
 $move_sel move $M
 
 $move_sel writepdb aligned_6c8l_wrt_6c8d.pdb
+
+
+####
+## Wrap and align trajectories
+####
+
+package require pbctools
+mol new {input.psf} type {psf} first 0 last -1 step 1 waitfor 1
+mol addfile {input.dcd} type {dcd} first 0 last -1 step 1 waitfor all
+
+animate goto start
+pbc join res -ref "name P2"
+pbc join res -ref "name P"
+pbc join res -ref "name O1P"
+pbc unwrap
+pbc wrap -centersel "not ions and not waters" -center com -compound residue -all
+#pbc wrap -centersel "not ions" -center com -compound residue -all # For trajectories w/o water
+animate goto start
+pbc join res -ref "name P2"
+pbc join res -ref "name P"
+pbc join res -ref "name O1P"
+pbc unwrap
+pbc wrap -centersel "not ions and not waters" -center com -compound residue -all
+#pbc wrap -centersel "not ions" -center com -compound residue -all # For trajectories w/o water
+
+animate goto start
+set nuc0 [atomselect top nucleic frame 0]
+set nf [molinfo top get numframes]
+for {set i 0} {$i < $nf} {incr i} {
+        set all [atomselect top all frame $i]
+        set nuc [atomselect top nucleic frame $i]
+        set M [measure fit $nuc $nuc0]
+        $all move $M
+}
+
+animate write dcd {output.dcd} beg 0 end 499 waitfor all
+
+exit
+
+## Note: Repeat the following with different atom selections when nothing else works!
+##
+## pbc unwrap
+## pbc wrap -centersel "not ions and not waters" -center com -compound residue -all
+
