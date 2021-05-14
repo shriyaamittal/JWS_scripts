@@ -1,0 +1,16 @@
+####
+## Change beta and occupancy columns
+####
+set allatoms [atomselect top all]
+	 
+$allatoms set beta 0
+$allatoms set occupancy 0
+
+$allatoms writepdb smd01.ref
+
+
+####
+## SMD, coordinates, force
+####
+
+cat <>.log| grep -e "SMD  " > <>_SMD.log

@@ -1,7 +1,0 @@
-set allatoms [atomselect top all]
-	 
-$allatoms set beta 0
-$allatoms set occupancy 0
-
-$allatoms writepdb smd01.ref
-
