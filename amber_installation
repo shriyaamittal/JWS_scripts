@@ -2,19 +2,24 @@
 ## AMBER installation on lab PC
 ####
 
-tar jxvf AmberTools15.tar.bz2
-tar jxvf Amber14.tar.bz2
+- Put both ambertools and amber in same directory
 
-cd amber20_src
-export AMBERHOME=`pwd`
+tar jxvf AmberTools21.tar.bz2
+tar jxvf Amber20.tar.bz2
 
-cd build
+#cd amber20_src
+#export AMBERHOME=`pwd`
+
+cd cd amber20_src/build
 ./run_cmake
 
 make install
 
-Consider adding to bashrc:
-    source /Users/mittal/Downloads/AMBER_DOWNLOADED/amber20/amber.sh
+- Put the following in .zshrc
+source /Users/mittal/Downloads/AMBER_DOWNLOADED/amber20/amber.sh
 
 cd $AMBERHOME
 make test.serial
+
+http://jswails.wikidot.com/installing-amber14-and-ambertools14
+https://docs.google.com/document/d/1I4p5LF4jhsDD75MvzaKdzOY539FtsFlRg-n6z-MBk6U/edit
