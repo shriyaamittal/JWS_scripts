@@ -16,5 +16,5 @@ make install
 Consider adding to bashrc:
     source /Users/mittal/Downloads/AMBER_DOWNLOADED/amber20/amber.sh
 
- cd $AMBERHOME
- make test.serial
+cd $AMBERHOME
+make test.serial

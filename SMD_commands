@@ -13,4 +13,4 @@ $allatoms writepdb smd01.ref
 ## SMD, coordinates, force
 ####
 
-cat <>.log| grep -e "SMD  " > <>_SMD.log
+cat <>.log | grep -e "SMD  " > <>_SMD.log
