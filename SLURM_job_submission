@@ -65,3 +65,52 @@ module load gcc/6.2.0 cuda/10.1
 
 sacct --helpformat
 sacct --format="JobID,JobName%100" # This will show jobname upto 100 characters
+
+####
+## Submitting MD simulation jobs on O2 cluster using SLURM
+##
+
+structure="strand_12_nt_EQ1_major_unp"
+
+for replicate in 0{1..5};
+do
+        prev_production_step="5.8"
+        production_step="5.9"
+#       production_step="4"
+
+        job_filename=${structure}_${replicate}_${production_step}.gpuSLURM
+        prev_job_filename=${structure}_${replicate}_${prev_production_step}.gpuSLURM
+        touch ${job_filename}
+
+        echo "#!/bin/bash" > ${job_filename}
+        echo "#SBATCH -c 20" >> ${job_filename}
+        echo "#SBATCH -t 16:00:00" >> ${job_filename}
+        echo "#SBATCH -p gpu_quad" >> ${job_filename}
+        echo "#SBATCH --gres=gpu:1" >> ${job_filename}
+        echo "#SBATCH -o ${structure}_${replicate}_step${production_step}_%j.out" >> ${job_filename}
+
+        echo "module load gcc/6.2.0 cuda/10.1" >> ${job_filename}
+
+#       echo "path=\"./production_runs/rep_${replicate}/\"" >> ${job_filename}
+        echo "path=\"./rep_${replicate}/\"" >> ${job_filename}
+        echo "cd \${path} " >> ${job_filename}
+
+        echo "" >> ${job_filename}
+        echo "/home/shm976/Sofware/NAMD_2.14_Linux-x86_64-multicore-CUDA/namd2 +p 16 step${production_step}_production.inp > step${production_step}_production.log" >> ${job_filename}
+#       echo "/home/shm976/Sofware/NAMD_2.14_Linux-x86_64-multicore-CUDA/namd2 +p 16 step4_equilibration.inp > step4_equilibration.log" >> ${job_filename}
+
+#       cat ${job_filename}
+#       sbatch ${job_filename}
+
+        squeue -u shm976 -n ${prev_job_filename} > temp_depend_01
+        tail -n 1 temp_depend_01 > temp_depend_02
+        job_id="$(cut -d " " -f 11 temp_depend_02)"
+
+#       echo ${prev_job_filename}
+#       echo ${job_id}
+
+#       cat ${job_filename}
+        sbatch --dependency=afterany:${job_id} ${job_filename}
+done
+
+squeue -u $USER
