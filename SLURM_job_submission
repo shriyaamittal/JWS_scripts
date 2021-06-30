@@ -59,3 +59,9 @@ module load gcc/6.2.0 cuda/10.1
 # Add your job command here
 /home/shm976/Sofware/NAMD_2.14_Linux-x86_64-multicore-CUDA/namd2
 
+####
+## Check full jobname, or other info
+####
+
+sacct --helpformat
+sacct --format="JobID,JobName%100" # This will show jobname upto 100 characters
