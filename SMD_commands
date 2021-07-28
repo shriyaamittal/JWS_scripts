@@ -14,3 +14,37 @@ $allatoms writepdb smd01.ref
 ####
 
 cat <>.log | grep -e "SMD  " > <>_SMD.log
+
+####
+## Pulling vector
+####
+
+import math
+
+O3_prime_coord=[-11.137,14.146,19.739]
+P2_coord=[-13.813,13.198,18.285]
+
+def func_calc_unit_vector(x,y,z):
+        m = math.sqrt(x*x + y*y + z*z)
+
+        vx = x/m
+        vy = y/m
+        vz = z/m
+
+        return vx, vy, vz
+
+
+#P2-O3' ; #P2 moves away from O3'
+x=P2_coord[0]-O3_prime_coord[0]
+y=P2_coord[1]-O3_prime_coord[1]
+z=P2_coord[2]-O3_prime_coord[2]
+
+print (func_calc_unit_vector(x,y,z))
+
+#O3'-P2 ; #P2 moves towards O3'
+x=O3_prime_coord[0]-P2_coord[0]
+y=O3_prime_coord[1]-P2_coord[1]
+z=O3_prime_coord[2]-P2_coord[2]
+
+print (func_calc_unit_vector(x,y,z))
+
