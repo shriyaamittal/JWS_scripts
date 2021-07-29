@@ -21,8 +21,8 @@ cat <>.log | grep -e "SMD  " > <>_SMD.log
 
 import math
 
-O3_prime_coord=[-11.137,14.146,19.739]
-P2_coord=[-13.813,13.198,18.285]
+O3_prime_coord=[,,]
+P2_coord=[,,]
 
 def func_calc_unit_vector(x,y,z):
         m = math.sqrt(x*x + y*y + z*z)
