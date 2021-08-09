@@ -66,6 +66,10 @@ module load gcc/6.2.0 cuda/10.1
 sacct --helpformat
 sacct --format="JobID,JobName%100" # This will show jobname upto 100 characters
 
+However, this only shows jobs that are recently completed, running, or pending. So, for only running and pending jobs:
+
+sacct --format="JobID,JobName%30,State" | grep -e "RUNNING" -e "PENDING"
+
 ####
 ## Submitting MD simulation jobs on O2 cluster using SLURM
 ##
