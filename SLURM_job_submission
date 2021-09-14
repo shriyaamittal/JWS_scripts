@@ -71,8 +71,8 @@ However, this only shows jobs that are recently completed, running, or pending. 
 sacct --format="JobID,JobName%30,State" | grep -e "RUNNING" -e "PENDING"
 
 ####
-## Submitting MD simulation jobs on O2 cluster using SLURM
-##
+## Submitting MD simulation jobs on O2 cluster using SLURM, use filename write_gpuSLURM
+####
 
 structure="strand_12_nt_EQ1_major_unp"
 
