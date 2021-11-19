@@ -1,3 +1,11 @@
+#### 
+## Charges
+####
+
+puts [vecsum [[atomselect top "resid 5 and nucleic"] get charge]] 
+
+puts [vecsum [[atomselect top "all"] get charge]] 
+
 ####
 ## Align and calculate RMSD
 ####
