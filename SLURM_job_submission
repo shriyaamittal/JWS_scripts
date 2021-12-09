@@ -84,6 +84,7 @@ do
 
         job_filename=${structure}_${replicate}_${production_step}.gpuSLURM
         prev_job_filename=${structure}_${replicate}_${prev_production_step}.gpuSLURM
+#       prev_job_filename=${structure}_${replicate}_4.gpuSLURM
         touch ${job_filename}
 
         echo "#!/bin/bash" > ${job_filename}
