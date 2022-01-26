@@ -1,0 +1,9 @@
+    rounded_R_phos=[]
+    for i in range(len(R_phos)):
+        rounded_R_phos.append(np.round(R_phos[i][0],2))
+    
+    import statistics
+    
+    print("Mode:", statistics.mode(rounded_R_phos))
+    print("Median:",np.median(R_phos))
+    print("Mean:",np.mean(R_phos))
