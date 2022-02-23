@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH -c 20                                   # 20 core
+#SBATCH -t 1:00:00                              # Runtime of 1 hours
+#SBATCH -p short                                # short partition
+#SBATCH -o example.out          		# File to which STDOUT + STDERR will be written, including job ID in filename
+
+module load intel				# Needed for MOPAC
+# Add your job command here
+
+## For a MOPAC job,
+#/home/shm976/Sofware/MOPAC2016_for_Linux_64_bit/MOPAC2016.exe example.mop
+
+## For a NAMD-MOPAC QM/MM job
+cd /home/shm976/testing_mopac/Example1/run
+/home/shm976/Sofware/NAMD_2.14b2_Linux-x86_64-multicore/namd2 +p 16 config.namd > out.log
+
+# Submit as, sbatch SLURM
+# or, sbatch --dependency=afterok:${job_id} ${job_filename}
