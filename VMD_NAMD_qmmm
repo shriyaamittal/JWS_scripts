@@ -1,0 +1,23 @@
+## Write QM/MM only psf file from PDB file where beta column contains QM/MM atoms
+
+set qmPSF "ionized-qm.QMonly.psf"
+set idDictFileName "ionized-qm.idDict.txt"
+
+[ atomselect 0 "beta > 0" ] writepsf $qmPSF
+
+set qmsel [ atomselect 0 "beta > 0" ]
+
+set indxs [ $qmsel get index ]
+
+set fileId [open $idDictFileName "w"]
+
+for {set i 0} { $i < [$qmsel num] } {incr i} {
+    
+    set ID [lindex $indxs $i]
+    
+    set data "$i $ID"
+    
+    puts $fileId $data
+}
+
+close $fileId
